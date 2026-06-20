@@ -98,8 +98,8 @@ export default function App() {
     if (db) {
       const puCollection = collection(db, "pollingUnits");
       const unsubscribe = onSnapshot(puCollection, (snapshot) => {
-        // If the database is empty or partially seeded (e.g. user refreshed during seed), re-seed.
-        if (snapshot.size < 2444 && !isSeedingRef.current) {
+        // If the database is completely empty, initialize the seed.
+        if (snapshot.size === 0 && !isSeedingRef.current) {
           isSeedingRef.current = true;
           seedFirebaseDatabase().finally(() => {
             isSeedingRef.current = false;
