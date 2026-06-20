@@ -1,0 +1,6 @@
+{
+  "name": "Ekiti Election Results Reporting System",
+  "description": "A dynamic election reporting and aggregation system for the Ekiti State Governorship Election 2026, featuring real-time rollups from Polling Units to Wards and LGAs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
