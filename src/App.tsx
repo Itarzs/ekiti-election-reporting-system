@@ -77,14 +77,15 @@ export default function App() {
         chunks.push(initialData.slice(i, i + FIREBASE_BATCH_LIMIT));
       }
       
-      for (const chunk of chunks) {
-        const batch = writeBatch(db);
-        chunk.forEach(pu => {
-          const puRef = doc(db, "pollingUnits", pu.id);
-          batch.set(puRef, pu);
-        });
-        await batch.commit();
-      }
+        for (const chunk of chunks) {
+          const batch = writeBatch(db);
+          chunk.forEach(pu => {
+            const puRef = doc(db, "pollingUnits", pu.id);
+            // Use { merge: true } so we don't overwrite user-entered data if it already exists!
+            batch.set(puRef, pu, { merge: true });
+          });
+          await batch.commit();
+        }
       showToast("SUCCESS: Firebase Database completely seeded!");
     } catch(e) {
       console.error(e);
